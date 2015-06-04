@@ -51,11 +51,8 @@ module.exports = require('gruntfile')(function(grunt) {
     grunt.registerTask('build', 'Generates the package for distribution', [
         'clean:dist',
         '_compile:dist',
+        'filerev:dist',
         'usemin'
-    ]);
-
-    grunt.registerTask('dist', 'Create distribution', [
-        '_package'
     ]);
 
     grunt.registerTask('serve:benchmark', 'Generates documentation and reports', [
@@ -66,32 +63,33 @@ module.exports = require('gruntfile')(function(grunt) {
     ]);
 
     // Internal tasks
-    grunt.registerTask('_review:js', 'Internal use only', [
+    grunt.registerTask('_review:js', 'Valids the code (internal use only)', [
         'jshint',
-        'jscs',
         'csslint'
     ]);
-    grunt.registerTask('_minify', 'Internal use only', [
+
+    grunt.registerTask('_minify', 'Minifiy the code and assets (internal use only)', [
         'uglify',
         'htmlmin',
-        'cssmin',
         'imagemin',
         'svgmin'
     ]);
 
-    grunt.registerTask('_compile:dist', 'Internal use only', [
+    grunt.registerTask('_compile:dist', 'Build compile process (internal use only)', [
         'sass:dist',
-        'autoprefixer:dist',
+        'postcss:dist',
         '_review:js',
         'copy:dist',
+        'svgstore:dist',
         '_minify'
     ]);
 
-    grunt.registerTask('_compile:server', 'Internal use only', [
+    grunt.registerTask('_compile:server', 'Server compile process (internal use only)', [
         'sass:server',
-        'autoprefixer:server',
+        'postcss:server',
         '_review:js',
-        'copy:server'
+        'copy:server',
+        'svgstore:server'
     ]);
 
 });

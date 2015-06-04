@@ -26,6 +26,7 @@ module.exports.tasks = {
                 src: [
                     '<%= paths.server %>/styles/main.css',
                     '<%= paths.server %>/assets/**/*',
+                    '<%= paths.server %>/resources/**/*',
                     '<%= paths.server %>/scripts/*.js',
                     '<%= paths.server %>/*.html',
                     'Gruntfile.js'
@@ -42,21 +43,25 @@ module.exports.tasks = {
         },
         js: {
             files: ['<%= paths.app %>/{,**/}*.js'],
-            tasks: ['newer:jshint', 'newer:jscs'],
+            tasks: ['newer:jshint'],
             options: {
                 spawn: false
             }
         },
         styles: {
             files: ['<%= paths.app %>/styles/{,*/}*.scss'],
-            tasks: 'libsass:server',
+            tasks: ['sass:server', 'postcss:server', 'csslint'],
             options: {
                 spawn: false
             }
         },
         assets: {
             files: ['<%= paths.app %>/assets/**/*'],
-            tasks: 'newer:copy:server'
+            tasks: ['newer:copy:server']
+        },
+        resources: {
+            files: ['<%= paths.app %>/resources/**/*'],
+            tasks: ['newer:copy:server']
         },
         html: {
             files: ['<%= paths.app %>/*.html'],
@@ -79,18 +84,29 @@ module.exports.tasks = {
         }
     },
     sass: {
+        options: {
+            debugInfo: true
+        },
         server: {
-            options: {
-                debugInfo: true
-            },
             src: '<%= paths.app %>/styles/main.scss',
             dest: '<%= paths.server %>/styles/main.css'
         }
     },
-    autoprefixer: {
+    postcss: {
         server: {
-            src: '<%= paths.server %>/styles/main.css',
-            dest: '<%= paths.server %>/styles/main.css'
+            options: {
+                map: true,
+            },
+            src: '<%= paths.server %>/styles/main.css'
+        }
+    },
+    svgstore: {
+        server: {
+            options: {
+                includedemo: true
+            },
+            src: '<%= paths.server %>/assets/svg/*.svg',
+            dest: '<%= paths.server %>/assets/svg/defs.svg'
         }
     }
 };

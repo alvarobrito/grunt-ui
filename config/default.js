@@ -1,6 +1,8 @@
 'use strict';
 
 /* global require, module */
+var autoprefixer = require('autoprefixer-core');
+var csswring = require('csswring');
 var jshintStylish = require('jshint-stylish');
 
 module.exports.tasks = {
@@ -11,27 +13,38 @@ module.exports.tasks = {
         },
         all: ['Gruntfile.js', '<%= paths.app %>/{,**/}*.js']
     },
-    jscs: {
-        options: {
-            config: '.jscsrc',
-            verbose: true // If you need output with rule names http://jscs.info/overview.html#verbose
-        },
-        src: '<%= paths.app %>/{,**/}*.js',
-    },
     csslint: {
         options: {
             csslintrc: '.csslintrc'
         },
         src: ['<%= paths.server %>/styles/{,**/}*.css']
     },
-    autoprefixer: {
-        options: {
-            browsers: ['last 2 version', 'ie 9']
-        },
-    },
     sass: {
         options: {
             includePaths: ['bower_components']
+        }
+    },
+    postcss: {
+        options: {
+            processors: [
+                autoprefixer({
+                    browsers: 'last 1 version'
+                }),
+                csswring // minify css
+            ]
+        }
+    },
+    svgstore: {
+        options: {
+            cleanup: true,
+            cleanupdefs: true,
+            includedemo: false,
+            preserveDescElement: false,
+            prefix: 'icon-',
+            svg: { // will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
+                viewBox: '0 0 100 100',
+                xmlns: 'http://www.w3.org/2000/svg'
+            }
         }
     }
 };

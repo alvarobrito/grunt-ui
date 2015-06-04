@@ -1,10 +1,8 @@
-/*
-    Exports application ports, randomized if "--random-ports" option is used with any grunt task.
- */
-
 'use strict';
 
 /* global module */
+
+// Exports application ports, randomized if "--random-ports" option is used with any grunt task.
 
 var randomIntInc = function(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);

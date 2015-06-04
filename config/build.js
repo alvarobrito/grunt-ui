@@ -37,23 +37,21 @@ module.exports.tasks = {
             dest: '<%= paths.dist %>/styles/main.css'
         }
     },
-    autoprefixer: {
+    postcss: {
         dist: {
-            files: [{
-                expand: true,
-                cwd: '<%= paths.dist %>/styles',
-                src: '{,*/}*.css',
-                dest: '<%= paths.dist %>/styles'
-            }]
+            src: '<%= paths.dist %>/styles/main.css'
+        }
+    },
+    svgstore: {
+        dist: {
+            src: '<%= paths.dist %>/assets/svg/*.svg',
+            dest: '<%= paths.dist %>/assets/svg/defs.svg'
         }
     },
     usemin: {
-        options: {
-            assetsDirs: ['<%= paths.dist %>']
-        },
-        js: ['<%= paths.dist %>/scripts/{,*/}*.js'],
-        html: ['<%= paths.dist %>/{,*/}*.html'],
-        css: ['<%= paths.dist %>/styles/{,*/}*.css']
+        js: ['<%= paths.dist %>/scripts/*.js'],
+        html: ['<%= paths.dist %>/*.html'],
+        css: ['<%= paths.dist %>/styles/*.css']
     },
     uglify: {
         dist: {
@@ -62,19 +60,6 @@ module.exports.tasks = {
                 cwd: '<%= paths.dist %>/scripts',
                 src: 'index.js',
                 dest: '<%= paths.dist %>/scripts'
-            }]
-        }
-    },
-    cssmin: {
-        dist: {
-            options: {
-                banner: '/*! JSkeleton application - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */'
-            },
-            files: [{
-                expand: true,
-                cwd: '<%= paths.dist %>/styles',
-                src: 'main.css',
-                dest: '<%= paths.dist %>/styles'
             }]
         }
     },
