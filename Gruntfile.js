@@ -51,7 +51,6 @@ module.exports = require('gruntfile')(function(grunt) {
     grunt.registerTask('build', 'Generates the package for distribution', [
         'clean:dist',
         '_compile:dist',
-        'filerev:dist',
         'usemin'
     ]);
 
@@ -71,8 +70,8 @@ module.exports = require('gruntfile')(function(grunt) {
     grunt.registerTask('_minify', 'Minifiy the code and assets (internal use only)', [
         'uglify',
         'htmlmin',
-        'imagemin',
-        'svgmin'
+        'imagemin'
+        //'svgmin'
     ]);
 
     grunt.registerTask('_compile:dist', 'Build compile process (internal use only)', [
@@ -87,9 +86,12 @@ module.exports = require('gruntfile')(function(grunt) {
     grunt.registerTask('_compile:server', 'Server compile process (internal use only)', [
         'sass:server',
         'postcss:server',
+        'stripmq',
+        'rem-to-px',
         '_review:js',
         'copy:server',
-        'svgstore:server'
+        'svgstore:server',
+        'grunticon'
     ]);
 
 });

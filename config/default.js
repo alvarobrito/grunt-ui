@@ -29,9 +29,43 @@ module.exports.tasks = {
             processors: [
                 autoprefixer({
                     browsers: 'last 1 version'
-                }),
-                csswring // minify css
+                })
             ]
+        }
+    },
+    stripmq: {
+        //Viewport options
+        options: {
+            width: 1000,
+            type: 'screen'
+        },
+        all: {
+            files: {
+                '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main.css']
+            }
+        }
+    },
+    'rem-to-px': {
+      all: {
+        files: {
+            '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main-ie.css']
+        }
+      }
+    },
+    grunticon: {
+        all: {
+            files: [{
+                expand: true,
+                cwd: '<%=paths.app %>/assets/svg/',
+                src: ['*.svg', '*.png'],
+                dest: "<%=paths.server %>"
+            }],
+            options: {
+                colors : {
+                    gray : "#909090",
+                    red: "#ff0000"
+                }
+            }
         }
     },
     svgstore: {
