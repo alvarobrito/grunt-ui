@@ -38,19 +38,7 @@ module.exports.tasks = {
         options: {
             width: 1000,
             type: 'screen'
-        },
-        all: {
-            files: {
-                '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main.css']
-            }
         }
-    },
-    'rem-to-px': {
-      all: {
-        files: {
-            '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main-ie.css']
-        }
-      }
     },
     grunticon: {
         all: {

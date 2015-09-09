@@ -28,6 +28,11 @@ module.exports.tasks = {
                 cwd: '<%= paths.app %>/assets',
                 src: '**/*',
                 dest: '<%= paths.dist %>/assets'
+            }, {
+                expand: true,
+                cwd: '<%= paths.app %>/styles',
+                src: 'ie.css',
+                dest: '<%= paths.dist %>/styles'
             }]
         }
     },
@@ -40,6 +45,20 @@ module.exports.tasks = {
     postcss: {
         dist: {
             src: '<%= paths.dist %>/styles/main.css'
+        }
+    },    
+    stripmq: {
+        dist: {
+            files: {
+                '<%= paths.dist %>/styles/main-ie.css': ['<%= paths.dist %>/styles/main.css']
+            }
+        }
+    },
+    'rem-to-px': {
+        dist: {
+            files: {
+                '<%= paths.dist %>/styles/main-ie.css': ['<%= paths.dist %>/styles/main-ie.css']
+            }
         }
     },
     svgstore: {

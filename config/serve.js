@@ -80,6 +80,11 @@ module.exports.tasks = {
                 cwd: '<%= paths.app %>/assets',
                 src: '**/*',
                 dest: '<%= paths.server %>/assets'
+            }, {
+                expand: true,
+                cwd: '<%= paths.app %>/styles',
+                src: 'ie.css',
+                dest: '<%= paths.server %>/styles'
             }]
         }
     },
@@ -98,6 +103,20 @@ module.exports.tasks = {
                 map: true,
             },
             src: '<%= paths.server %>/styles/main.css'
+        }
+    },
+    stripmq: {
+        server: {
+            files: {
+                '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main.css']
+            }
+        }
+    },
+    'rem-to-px': {
+        server: {
+            files: {
+                '<%= paths.server %>/styles/main-ie.css': ['<%= paths.server %>/styles/main-ie.css']
+            }
         }
     },
     svgstore: {

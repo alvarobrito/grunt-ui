@@ -77,6 +77,8 @@ module.exports = require('gruntfile')(function(grunt) {
     grunt.registerTask('_compile:dist', 'Build compile process (internal use only)', [
         'sass:dist',
         'postcss:dist',
+        'stripmq',
+        'rem-to-px',        
         '_review:js',
         'copy:dist',
         'svgstore:dist',
@@ -90,8 +92,8 @@ module.exports = require('gruntfile')(function(grunt) {
         'rem-to-px',
         '_review:js',
         'copy:server',
-        'svgstore:server',
-        'grunticon'
+        'svgstore:server'
+        //'grunticon'
     ]);
 
 });
